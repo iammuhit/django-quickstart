@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include "partials/metadata.html" %}
+    </head>
+    <body>
+        {% include "partials/header.html" %}
+
+        <section id="primary" class="container container-fluid">
+            {% block content %}
+                <!-- Content -->
+            {% endblock %}
+        </section>
+
+        {% include "partials/footer.html" %}
+    </body>
+</html>
