@@ -54,7 +54,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [APP_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'resources/templates', APP_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'database/db.sqlite3',
     }
 }
 
@@ -102,22 +102,34 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
+USE_I18N = True
 LANGUAGE_CODE = 'en-us'
 
+USE_TZ = True
 TIME_ZONE = 'Europe/Stockholm'
 
-USE_I18N = True
+LOCALE_PATHS = [BASE_DIR / 'resources/locale']
 
-USE_TZ = True
+# Media Files (Local Files, Uploads)
+# https://docs.djangoproject.com/en/6.0/topics/files/
+
+# MEDIA_ROOT = BASE_DIR / 'storage/files/'
+# MEDIA_URL = 'files/'
 
 
-# Static files (CSS, JavaScript, Images)
+# Static Files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'resources/assets/'
+STATIC_URL = 'assets/'
+
+STATICFILES_DIRS = []
+
 
 # User Authentication
 AUTH_USER_MODEL = 'auth.User'
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
+
 LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/users/profile/'
 LOGOUT_REDIRECT_URL = '/'
